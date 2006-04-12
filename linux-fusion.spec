@@ -10,11 +10,11 @@
 %undefine	with_dist_kernel
 %endif
 
+%define		_rel	0.1
 Summary:	Fusion Linux kernel module
 Summary(pl):	Modu³ Fusion dla j±dra Linuksa
 Name:		linux-fusion
 Version:	1.1
-%define		_rel	0.1
 Release:	%{_rel}
 License:	GPL v2+
 Group:		Base/Kernel
@@ -22,7 +22,7 @@ Source0:	http://www.directfb.org/download/DirectFB/%{name}-%{version}.tar.gz
 # Source0-md5:	227b62ee7374e4651355299147719c82
 URL:		http://www.directfb.org/
 %if %{with kernel}
-%{?with_dist_kernel:BuildRequires:	kernel-module-build >= 2.6.7}
+%{?with_dist_kernel:BuildRequires:	kernel-module-build >= 3:2.6.7}
 BuildRequires:	rpmbuild(macros) >= 1.217
 %endif
 BuildRequires:	sed >= 4.0
