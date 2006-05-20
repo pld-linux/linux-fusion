@@ -18,7 +18,7 @@ Version:	3.0
 Release:	%{_rel}
 License:	GPL v2+
 Group:		Base/Kernel
-Source0:	http://www.directfb.org/download/DirectFB/%{name}-%{version}.tar.gz
+Source0:	http://www.directfb.org/downloads/Core/%{name}-%{version}.tar.gz
 # Source0-md5:	8f666bab9a9c18f0c9e966e95dbe887d
 URL:		http://www.directfb.org/
 %if %{with kernel}
