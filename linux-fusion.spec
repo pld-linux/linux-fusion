@@ -14,12 +14,12 @@
 Summary:	Fusion Linux kernel module
 Summary(pl):	Modu³ Fusion dla j±dra Linuksa
 Name:		linux-fusion
-Version:	3.0
+Version:	3.2
 Release:	%{_rel}
 License:	GPL v2+
 Group:		Base/Kernel
 Source0:	http://www.directfb.org/downloads/Core/%{name}-%{version}.tar.gz
-# Source0-md5:	8f666bab9a9c18f0c9e966e95dbe887d
+# Source0-md5:	d1e154a8c1b1e7ec93635521be5d250b
 URL:		http://www.directfb.org/
 %if %{with kernel}
 %{?with_dist_kernel:BuildRequires:	kernel-module-build >= 3:2.6.14}
