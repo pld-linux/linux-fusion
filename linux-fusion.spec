@@ -12,7 +12,7 @@
 
 %define		_rel	1
 Summary:	Fusion Linux kernel module
-Summary(pl):	Modu³ Fusion dla j±dra Linuksa
+Summary(pl.UTF-8):   ModuÅ‚ Fusion dla jÄ…dra Linuksa
 Name:		linux-fusion
 Version:	3.2.1
 Release:	%{_rel}
@@ -31,24 +31,24 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Fusion Linux kernel module.
 
-%description -l pl
-Modu³ Fusion dla j±dra Linuksa.
+%description -l pl.UTF-8
+ModuÅ‚ Fusion dla jÄ…dra Linuksa.
 
 %package devel
 Summary:	Header file for Fusion device
-Summary(pl):	Plik nag³ówkowy dla urz±dzenia Fusion
+Summary(pl.UTF-8):   Plik nagÅ‚Ã³wkowy dla urzÄ…dzenia Fusion
 Group:		Development/Libraries
 Requires:	linux-libc-headers
 
 %description devel
 Header file for Fusion device.
 
-%description devel -l pl
-Plik nag³ówkowy dla urz±dzenia Fusion.
+%description devel -l pl.UTF-8
+Plik nagÅ‚Ã³wkowy dla urzÄ…dzenia Fusion.
 
 %package -n kernel-char-fusion
 Summary:	Fusion module for Linux kernel
-Summary(pl):	Modu³ Fusion dla j±dra Linuksa
+Summary(pl.UTF-8):   ModuÅ‚ Fusion dla jÄ…dra Linuksa
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 Requires(post,postun):	/sbin/depmod
@@ -60,12 +60,12 @@ Requires(postun):	%releq_kernel_up
 %description -n kernel-char-fusion
 Fusion module for Linux kernel.
 
-%description -n kernel-char-fusion -l pl
-Modu³ Fusion dla j±dra Linuksa.
+%description -n kernel-char-fusion -l pl.UTF-8
+ModuÅ‚ Fusion dla jÄ…dra Linuksa.
 
 %package -n kernel-smp-char-fusion
 Summary:	Fusion module for Linux SMP kernel
-Summary(pl):	Modu³ Fusion dla j±dra Linuksa SMP
+Summary(pl.UTF-8):   ModuÅ‚ Fusion dla jÄ…dra Linuksa SMP
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 Requires(post,postun):	/sbin/depmod
@@ -77,8 +77,8 @@ Requires(postun):	%releq_kernel_smp
 %description -n kernel-smp-char-fusion
 Fusion module for Linux SMP kernel.
 
-%description -n kernel-smp-char-fusion -l pl
-Modu³ Fusion dla j±dra Linuksa SMP.
+%description -n kernel-smp-char-fusion -l pl.UTF-8
+ModuÅ‚ Fusion dla jÄ…dra Linuksa SMP.
 
 %prep
 %setup -q
