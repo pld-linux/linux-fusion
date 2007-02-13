@@ -12,7 +12,7 @@
 
 %define		_rel	1
 Summary:	Fusion Linux kernel module
-Summary(pl.UTF-8):   Moduł Fusion dla jądra Linuksa
+Summary(pl.UTF-8):	Moduł Fusion dla jądra Linuksa
 Name:		linux-fusion
 Version:	3.2.1
 Release:	%{_rel}
@@ -36,7 +36,7 @@ Moduł Fusion dla jądra Linuksa.
 
 %package devel
 Summary:	Header file for Fusion device
-Summary(pl.UTF-8):   Plik nagłówkowy dla urządzenia Fusion
+Summary(pl.UTF-8):	Plik nagłówkowy dla urządzenia Fusion
 Group:		Development/Libraries
 Requires:	linux-libc-headers
 
@@ -48,7 +48,7 @@ Plik nagłówkowy dla urządzenia Fusion.
 
 %package -n kernel-char-fusion
 Summary:	Fusion module for Linux kernel
-Summary(pl.UTF-8):   Moduł Fusion dla jądra Linuksa
+Summary(pl.UTF-8):	Moduł Fusion dla jądra Linuksa
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 Requires(post,postun):	/sbin/depmod
@@ -65,7 +65,7 @@ Moduł Fusion dla jądra Linuksa.
 
 %package -n kernel-smp-char-fusion
 Summary:	Fusion module for Linux SMP kernel
-Summary(pl.UTF-8):   Moduł Fusion dla jądra Linuksa SMP
+Summary(pl.UTF-8):	Moduł Fusion dla jądra Linuksa SMP
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 Requires(post,postun):	/sbin/depmod
