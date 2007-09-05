@@ -11,16 +11,16 @@
 %undefine	with_dist_kernel
 %endif
 
-%define		_rel	1
 Summary:	Fusion Linux kernel module
 Summary(pl.UTF-8):	Moduł Fusion dla jądra Linuksa
 Name:		linux-fusion
-Version:	3.2.3
-Release:	%{_rel}
+Version:	3.2.4
+%define		rel	1
+Release:	%{rel}
 License:	GPL v2+
 Group:		Base/Kernel
 Source0:	http://www.directfb.org/downloads/Core/%{name}-%{version}.tar.gz
-# Source0-md5:	b8b18ad1973de3dafa0bc3478e5e76b7
+# Source0-md5:	73da31ddbb61fa37aeb766f1bd5f03f0
 URL:		http://www.directfb.org/
 %if %{with kernel}
 %{?with_dist_kernel:BuildRequires:	kernel-module-build >= 3:2.6.14}
@@ -50,7 +50,7 @@ Plik nagłówkowy dla urządzenia Fusion.
 %package -n kernel-char-fusion
 Summary:	Fusion module for Linux kernel
 Summary(pl.UTF-8):	Moduł Fusion dla jądra Linuksa
-Release:	%{_rel}@%{_kernel_ver_str}
+Release:	%{rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 Requires(post,postun):	/sbin/depmod
 %if %{with dist_kernel}
@@ -67,7 +67,7 @@ Moduł Fusion dla jądra Linuksa.
 %package -n kernel-smp-char-fusion
 Summary:	Fusion module for Linux SMP kernel
 Summary(pl.UTF-8):	Moduł Fusion dla jądra Linuksa SMP
-Release:	%{_rel}@%{_kernel_ver_str}
+Release:	%{rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 Requires(post,postun):	/sbin/depmod
 %if %{with dist_kernel}
