@@ -2,8 +2,6 @@
 # Conditional build:
 %bcond_without	dist_kernel	# allow non-distribution kernel
 %bcond_without	kernel		# don't build kernel modules
-%bcond_without	up		# don't build UP module
-%bcond_without	smp		# don't build SMP module
 %bcond_without	userspace	# don't build userspace programs
 %bcond_with	verbose		# verbose build (V=1)
 #
@@ -14,13 +12,14 @@
 Summary:	Fusion Linux kernel module
 Summary(pl.UTF-8):	Moduł Fusion dla jądra Linuksa
 Name:		linux-fusion
-Version:	3.2.4
+Version:	8.0.1
 %define		rel	1
 Release:	%{rel}
 License:	GPL v2+
 Group:		Base/Kernel
 Source0:	http://www.directfb.org/downloads/Core/%{name}-%{version}.tar.gz
-# Source0-md5:	73da31ddbb61fa37aeb766f1bd5f03f0
+# Source0-md5:	4b918a0ddb093436f15411cef4a967e7
+Patch0:		%{name}-kernel.patch
 URL:		http://www.directfb.org/
 %if %{with kernel}
 %{?with_dist_kernel:BuildRequires:	kernel-module-build >= 3:2.6.14}
@@ -64,25 +63,9 @@ Fusion module for Linux kernel.
 %description -n kernel-char-fusion -l pl.UTF-8
 Moduł Fusion dla jądra Linuksa.
 
-%package -n kernel-smp-char-fusion
-Summary:	Fusion module for Linux SMP kernel
-Summary(pl.UTF-8):	Moduł Fusion dla jądra Linuksa SMP
-Release:	%{rel}@%{_kernel_ver_str}
-Group:		Base/Kernel
-Requires(post,postun):	/sbin/depmod
-%if %{with dist_kernel}
-%requires_releq_kernel_smp
-Requires(postun):	%releq_kernel_smp
-%endif
-
-%description -n kernel-smp-char-fusion
-Fusion module for Linux SMP kernel.
-
-%description -n kernel-smp-char-fusion -l pl.UTF-8
-Moduł Fusion dla jądra Linuksa SMP.
-
 %prep
 %setup -q
+%patch0 -p1
 
 sed -i -e 's/^obj-[^ ]*/obj-m/' linux/drivers/char/fusion/Makefile-2.6
 echo "EXTRA_CFLAGS = -I`pwd`/linux/include" >> linux/drivers/char/fusion/Makefile-2.6
@@ -91,31 +74,7 @@ echo "EXTRA_CFLAGS = -I`pwd`/linux/include" >> linux/drivers/char/fusion/Makefil
 %if %{with kernel}
 cd linux/drivers/char/fusion
 ln -sf Makefile-2.6 Makefile
-for cfg in %{?with_dist_kernel:%{?with_smp:smp} up}%{!?with_dist_kernel:nondist}; do
-	if [ ! -r "%{_kernelsrcdir}/config-$cfg" ]; then
-		exit 1
-	fi
-	install -d o/include/linux
-	ln -sf %{_kernelsrcdir}/config-$cfg o/.config
-	ln -sf %{_kernelsrcdir}/Module.symvers-$cfg o/Module.symvers
-	ln -sf %{_kernelsrcdir}/include/linux/autoconf-$cfg.h o/include/linux/autoconf.h
-	%{__make} -j1 -C %{_kernelsrcdir} O=$PWD/o prepare scripts
-	%{__make} -C %{_kernelsrcdir} clean \
-		RCS_FIND_IGNORE="-name '*.ko' -o" \
-		SYSSRC=%{_kernelsrcdir} \
-		SYSOUT=$PWD/o \
-		M=$PWD O=$PWD/o \
-		%{?with_verbose:V=1}
-	%{__make} -C %{_kernelsrcdir} modules \
-		CC="%{__cc}" CPP="%{__cpp}" \
-		SYSSRC=%{_kernelsrcdir} \
-		SYSOUT=$PWD/o \
-		M=$PWD O=$PWD/o \
-		%{?with_verbose:V=1}
-
-	mv fusion{,-$cfg}.ko
-done
-cd ../../../..
+%build_kernel_modules -m fusion
 %endif
 
 %install
@@ -128,13 +87,7 @@ install linux/include/linux/fusion.h $RPM_BUILD_ROOT%{_includedir}/linux
 
 %if %{with kernel}
 cd linux/drivers/char/fusion
-install -d $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}{,smp}/kernel/drivers/char
-install fusion-%{?with_dist_kernel:up}%{!?with_dist_kernel:nondist}.ko \
-	$RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}/kernel/drivers/char/fusion.ko
-%if %{with smp} && %{with dist_kernel}
-install fusion-smp.ko \
-	$RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}smp/kernel/drivers/char/fusion.ko
-%endif
+%install_kernel_modules -m fusion -d kernel/drivers/char
 %endif
 
 %clean
@@ -146,12 +99,6 @@ rm -rf $RPM_BUILD_ROOT
 %postun	-n kernel-char-fusion
 %depmod %{_kernel_ver}
 
-%post	-n kernel-smp-char-fusion
-%depmod %{_kernel_ver}smp
-
-%postun	-n kernel-smp-char-fusion
-%depmod %{_kernel_ver}smp
-
 %if %{with userspace}
 %files devel
 %defattr(644,root,root,755)
@@ -160,15 +107,7 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %if %{with kernel}
-%if %{with up} || %{without dist_kernel}
 %files -n kernel-char-fusion
 %defattr(644,root,root,755)
 /lib/modules/%{_kernel_ver}/kernel/drivers/char/fusion.ko*
-%endif
-
-%if %{with smp} && %{with dist_kernel}
-%files -n kernel-smp-char-fusion
-%defattr(644,root,root,755)
-/lib/modules/%{_kernel_ver}smp/kernel/drivers/char/fusion.ko*
-%endif
 %endif
