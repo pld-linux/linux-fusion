@@ -22,8 +22,8 @@ Source0:	http://www.directfb.org/downloads/Core/%{name}-%{version}.tar.gz
 Patch0:		%{name}-kernel.patch
 URL:		http://www.directfb.org/
 %if %{with kernel}
-%{?with_dist_kernel:BuildRequires:	kernel-module-build >= 3:2.6.14}
-BuildRequires:	rpmbuild(macros) >= 1.217
+%{?with_dist_kernel:BuildRequires:	kernel-module-build >= 3:2.6.20.2}
+BuildRequires:	rpmbuild(macros) >= 1.379
 %endif
 BuildRequires:	sed >= 4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
