@@ -1,0 +1,10 @@
+--- linux-fusion-8.0.1/linux/drivers/char/fusion/entries.h.orig	2008-08-12 14:51:07.000000000 +0200
++++ linux-fusion-8.0.1/linux/drivers/char/fusion/entries.h	2008-09-03 07:35:15.860979766 +0200
+@@ -16,6 +16,7 @@
+ #define __FUSION__ENTRIES_H__
+ 
+ #include <linux/mutex.h>
++#include <linux/semaphore.h>
+ 
+ #include "types.h"
+ #include "list.h"
