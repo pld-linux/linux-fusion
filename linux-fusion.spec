@@ -12,14 +12,13 @@
 Summary:	Fusion Linux kernel module
 Summary(pl.UTF-8):	Moduł Fusion dla jądra Linuksa
 Name:		linux-fusion
-Version:	8.0.1
+Version:	8.1.1
 %define		rel	1
 Release:	%{rel}
 License:	GPL v2+
 Group:		Base/Kernel
-Source0:	http://www.directfb.org/downloads/Core/%{name}-%{version}.tar.gz
-# Source0-md5:	4b918a0ddb093436f15411cef4a967e7
-Patch0:		%{name}-kernel.patch
+Source0:	http://www.directfb.org/downloads/Core/%{name}/%{name}-%{version}.tar.gz
+# Source0-md5:	54f3f3026c689220fe7df10d5c2e12f3
 URL:		http://www.directfb.org/
 %if %{with kernel}
 %{?with_dist_kernel:BuildRequires:	kernel-module-build >= 3:2.6.20.2}
@@ -65,7 +64,6 @@ Moduł Fusion dla jądra Linuksa.
 
 %prep
 %setup -q
-%patch0 -p1
 
 sed -i -e 's/^obj-[^ ]*/obj-m/' linux/drivers/char/fusion/Makefile-2.6
 echo "EXTRA_CFLAGS = -I`pwd`/linux/include" >> linux/drivers/char/fusion/Makefile-2.6
