@@ -12,13 +12,13 @@
 Summary:	Fusion Linux kernel module
 Summary(pl.UTF-8):	Moduł Fusion dla jądra Linuksa
 Name:		linux-fusion
-Version:	8.10.1
+Version:	8.10.2
 %define		rel	1
 Release:	%{rel}
 License:	GPL v2+
 Group:		Base/Kernel
 Source0:	http://www.directfb.org/downloads/Core/linux-fusion/%{name}-%{version}.tar.gz
-# Source0-md5:	8ddf6e88a879485ee6d7744d5e857b18
+# Source0-md5:	cd37ca07831103081afdfb8806e9e44e
 URL:		http://www.directfb.org/
 %if %{with kernel}
 %{?with_dist_kernel:BuildRequires:	kernel-module-build >= 3:2.6.20.2}
