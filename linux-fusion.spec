@@ -18,7 +18,7 @@ Version:	9.0.0
 Release:	%{rel}
 License:	GPL v2+
 Group:		Base/Kernel
-Source0:	http://www.directfb.org/downloads/Core/linux-fusion/%{name}-%{version}.tar.gz
+Source0:	http://www.directfb.org/downloads/Core/linux-fusion/%{pname}-%{version}.tar.gz
 # Source0-md5:	4199617ed8ba205da52fedfb862e4507
 URL:		http://www.directfb.org/
 %if %{with kernel}
