@@ -9,11 +9,12 @@
 %undefine	with_dist_kernel
 %endif
 
+%define		rel	2
+%define		pname	linux-fusion
 Summary:	Fusion and One Linux kernel modules
 Summary(pl.UTF-8):	Moduły Fusion i One dla jądra Linuksa
-Name:		linux-fusion
+Name:		%{pname}%{_alt_kernel}
 Version:	9.0.0
-%define		rel	1
 Release:	%{rel}
 License:	GPL v2+
 Group:		Base/Kernel
@@ -61,40 +62,40 @@ Plik nagłówkowy dla urządzenia IPC One.
 
 Linux One to nowe API IPC wykorzystywane przez Comę.
 
-%package -n kernel-char-fusion
+%package -n kernel%{_alt_kernel}-char-fusion
 Summary:	Fusion module for Linux kernel
 Summary(pl.UTF-8):	Moduł Fusion dla jądra Linuksa
 Release:	%{rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 Requires(post,postun):	/sbin/depmod
 %if %{with dist_kernel}
-%requires_releq_kernel_up
-Requires(postun):	%releq_kernel_up
+%requires_releq_kernel
+Requires(postun):	%releq_kernel
 %endif
 
-%description -n kernel-char-fusion
+%description -n kernel%{_alt_kernel}-char-fusion
 Fusion module for Linux kernel.
 
-%description -n kernel-char-fusion -l pl.UTF-8
+%description -n kernel%{_alt_kernel}-char-fusion -l pl.UTF-8
 Moduł Fusion dla jądra Linuksa.
 
-%package -n kernel-one
+%package -n kernel%{_alt_kernel}-misc-one
 Summary:	One IPC module for Linux kernel
 Summary(pl.UTF-8):	Moduł IPC One dla jądra Linuksa
 Release:	%{rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 Requires(post,postun):	/sbin/depmod
 %if %{with dist_kernel}
-%requires_releq_kernel_up
-Requires(postun):	%releq_kernel_up
+%requires_releq_kernel
+Requires(postun):	%releq_kernel
 %endif
 
-%description -n kernel-one
+%description -n kernel%{_alt_kernel}-misc-one
 One IPC module for Linux kernel.
 
 Linux One is the new IPC API used by Coma.
 
-%description -n kernel-one -l pl.UTF-8
+%description -n kernel%{_alt_kernel}-misc-one -l pl.UTF-8
 Moduł IPC One dla jądra Linuksa.
 
 Linux One to nowe API IPC wykorzystywane przez Comę.
@@ -131,22 +132,22 @@ install include/linux/one.h $RPM_BUILD_ROOT%{_includedir}/linux
 cd linux/drivers/char/fusion
 %install_kernel_modules -m fusion -d kernel/drivers/char
 cd ../../../../one
-%install_kernel_modules -m linux-one -d kernel
+%install_kernel_modules -m linux-one -d misc
 %endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-n kernel-char-fusion
+%post	-n kernel%{_alt_kernel}-char-fusion
 %depmod %{_kernel_ver}
 
-%postun	-n kernel-char-fusion
+%postun	-n kernel%{_alt_kernel}-char-fusion
 %depmod %{_kernel_ver}
 
-%post	-n kernel-one
+%post	-n kernel%{_alt_kernel}-misc-one
 %depmod %{_kernel_ver}
 
-%postun	-n kernel-one
+%postun	-n kernel%{_alt_kernel}-misc-one
 %depmod %{_kernel_ver}
 
 %if %{with userspace}
@@ -162,11 +163,11 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %if %{with kernel}
-%files -n kernel-char-fusion
+%files -n kernel%{_alt_kernel}-char-fusion
 %defattr(644,root,root,755)
 /lib/modules/%{_kernel_ver}/kernel/drivers/char/fusion.ko*
 
-%files -n kernel-one
+%files -n kernel%{_alt_kernel}-misc-one
 %defattr(644,root,root,755)
-/lib/modules/%{_kernel_ver}/kernel/linux-one.ko*
+/lib/modules/%{_kernel_ver}/misc/linux-one.ko*
 %endif
