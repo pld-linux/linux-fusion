@@ -101,7 +101,7 @@ Moduł IPC One dla jądra Linuksa.
 Linux One to nowe API IPC wykorzystywane przez Comę.
 
 %prep
-%setup -q
+%setup -q -n %{pname}-%{version}
 
 %{__sed} -i -e 's/^obj-[^ ]*/obj-m/' linux/drivers/char/fusion/Makefile-2.6
 %{__sed} -i -e 's/^obj-[^ ]*/obj-m/' one/Makefile-2.6
