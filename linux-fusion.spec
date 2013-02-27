@@ -9,7 +9,7 @@
 %undefine	with_dist_kernel
 %endif
 
-%define		rel	10
+%define		rel	11
 %define		pname	linux-fusion
 Summary:	Fusion and One Linux kernel modules
 Summary(pl.UTF-8):	Moduły Fusion i One dla jądra Linuksa
