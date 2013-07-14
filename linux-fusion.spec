@@ -9,17 +9,17 @@
 %undefine	with_dist_kernel
 %endif
 
-%define		rel	26
+%define		rel	1
 %define		pname	linux-fusion
 Summary:	Fusion and One Linux kernel modules
 Summary(pl.UTF-8):	Moduły Fusion i One dla jądra Linuksa
 Name:		%{pname}%{_alt_kernel}
-Version:	9.0.0
+Version:	9.0.1
 Release:	%{rel}
 License:	GPL v2+
 Group:		Base/Kernel
 Source0:	http://www.directfb.org/downloads/Core/linux-fusion/%{pname}-%{version}.tar.gz
-# Source0-md5:	4199617ed8ba205da52fedfb862e4507
+# Source0-md5:	ef03d3114b51c3f42e435ccfa683be2a
 URL:		http://www.directfb.org/
 %if %{with kernel}
 %{?with_dist_kernel:BuildRequires:	kernel-module-build >= 3:2.6.20.2}
@@ -101,7 +101,7 @@ Moduł IPC One dla jądra Linuksa.
 Linux One to nowe API IPC wykorzystywane przez Comę.
 
 %prep
-%setup -q -n %{pname}-%{version}
+%setup -q -n %{pname}
 
 %{__sed} -i -e 's/^obj-[^ ]*/obj-m/' linux/drivers/char/fusion/Makefile-2.6
 %{__sed} -i -e 's/^obj-[^ ]*/obj-m/' one/Makefile-2.6
