@@ -12,7 +12,7 @@
 %undefine	with_userspace
 %endif
 
-%define		rel	1
+%define		rel	2
 %define		pname	linux-fusion
 Summary:	Fusion and One Linux kernel modules
 Summary(pl.UTF-8):	Moduły Fusion i One dla jądra Linuksa
@@ -104,7 +104,7 @@ Moduł IPC One dla jądra Linuksa.
 Linux One to nowe API IPC wykorzystywane przez Comę.
 
 %prep
-%setup -q
+%setup -q -n %{pname}-%{version}
 
 %{__sed} -i -e 's/^obj-[^ ]*/obj-m/' linux/drivers/char/fusion/Makefile-2.6
 %{__sed} -i -e 's/^obj-[^ ]*/obj-m/' one/Makefile-2.6
