@@ -8,6 +8,9 @@
 %if %{without kernel}
 %undefine	with_dist_kernel
 %endif
+%if "%{_alt_kernel}" != "%{nil}"
+%undefine	with_userspace
+%endif
 
 %define		rel	1
 %define		pname	linux-fusion
