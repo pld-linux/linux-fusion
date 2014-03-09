@@ -43,16 +43,18 @@ exit 1
 Summary:	Fusion and One Linux kernel modules
 Summary(pl.UTF-8):	Moduły Fusion i One dla jądra Linuksa
 Name:		%{pname}%{?_pld_builder:%{?with_kernel:-kernel}}%{_alt_kernel}
-Version:	9.0.2
+Version:	9.0.3
 Release:	%{rel}%{?_pld_builder:%{?with_kernel:@%{_kernel_ver_str}}}
 License:	GPL v2+
 Group:		Base/Kernel
-Source0:	http://www.directfb.org/downloads/Core/linux-fusion/%{pname}-%{version}.tar.gz
-# Source0-md5:	f025373d2fe6d58e572f27410dadcf1f
+Source0:	http://www.directfb.org/downloads/Core/linux-fusion/%{pname}-%{version}.tar.xz
+# Source0-md5:	5799f52ec656cdd3da592c94a6262199
 URL:		http://www.directfb.org/
 %{?with_dist_kernel:%{expand:%kbrs}}
 BuildRequires:	rpmbuild(macros) >= 1.678
 BuildRequires:	sed >= 4.0
+BuildRequires:	tar >= 1:1.22
+BuildRequires:	xz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
