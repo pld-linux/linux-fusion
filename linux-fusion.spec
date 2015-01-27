@@ -1,13 +1,8 @@
 #
 # Conditional build:
-%bcond_without	dist_kernel	# allow non-distribution kernel
 %bcond_without	kernel		# don't build kernel modules
 %bcond_without	userspace	# don't build userspace programs
 %bcond_with	verbose		# verbose build (V=1)
-
-%if %{without kernel}
-%undefine	with_dist_kernel
-%endif
 
 # The goal here is to have main, userspace, package built once with
 # simple release number, and only rebuild kernel packages with kernel
@@ -50,7 +45,7 @@ Group:		Base/Kernel
 Source0:	http://www.directfb.org/downloads/Core/linux-fusion/%{pname}-%{version}.tar.xz
 # Source0-md5:	5799f52ec656cdd3da592c94a6262199
 URL:		http://www.directfb.org/
-%{?with_dist_kernel:%{expand:%kbrs}}
+%{?with_kernel:%{expand:%kbrs}}
 BuildRequires:	rpmbuild(macros) >= 1.678
 BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
@@ -98,10 +93,8 @@ Summary(pl.UTF-8):	Moduł Fusion dla jądra Linuksa\
 Release:	%{rel}@%{_kernel_ver_str}\
 Group:		Base/Kernel\
 Requires(post,postun):	/sbin/depmod\
-%if %{with dist_kernel}\
 %requires_releq_kernel\
 Requires(postun):	%releq_kernel\
-%endif\
 \
 %description -n kernel%{_alt_kernel}-char-fusion\
 Fusion module for Linux kernel.\
@@ -127,10 +120,8 @@ Summary(pl.UTF-8):	Moduł IPC One dla jądra Linuksa\
 Release:	%{rel}@%{_kernel_ver_str}\
 Group:		Base/Kernel\
 Requires(post,postun):	/sbin/depmod\
-%if %{with dist_kernel}\
 %requires_releq_kernel\
 Requires(postun):	%releq_kernel\
-%endif\
 \
 %description -n kernel%{_alt_kernel}-misc-one\
 One IPC module for Linux kernel.\
