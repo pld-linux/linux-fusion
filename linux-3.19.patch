@@ -1,0 +1,28 @@
+--- linux-fusion-9.0.3/one/one_udp.c.orig	2014-03-07 11:13:51.000000000 +0100
++++ linux-fusion-9.0.3/one/one_udp.c	2015-03-30 20:42:53.398770304 +0200
+@@ -183,8 +183,12 @@
+      msg.msg_namelen  = sizeof(struct sockaddr_in);
+      msg.msg_control = NULL;
+      msg.msg_controllen = 0;
++#if LINUX_VERSION_CODE < KERNEL_VERSION(3,19,0)
+      msg.msg_iov = (struct iovec*) iov;
+      msg.msg_iovlen = iov_count;
++#else
++     iov_iter_init(&msg.msg_iter, WRITE, iov, iov_count, len);
++#endif
+      msg.msg_control = NULL;
+ 
+      oldfs = get_fs();
+@@ -218,8 +222,12 @@
+      msg.msg_namelen  = sizeof(struct sockaddr_in);
+      msg.msg_control = NULL;
+      msg.msg_controllen = 0;
++#if LINUX_VERSION_CODE < KERNEL_VERSION(3,19,0)
+      msg.msg_iov = &iov;
+      msg.msg_iovlen = 1;
++#else
++     iov_iter_init(&msg.msg_iter, READ, &iov, 1, 1);
++#endif
+      msg.msg_control = NULL;
+ 
+      oldfs = get_fs();
