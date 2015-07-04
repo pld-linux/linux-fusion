@@ -18,7 +18,7 @@ exit 1
 %define		_enable_debug_packages	0
 %endif
 
-%define		rel	4
+%define		rel	5
 %define		pname	linux-fusion
 Summary:	Fusion and One Linux kernel modules
 Summary(pl.UTF-8):	Moduły Fusion i One dla jądra Linuksa
@@ -30,6 +30,7 @@ Group:		Base/Kernel
 Source0:	http://www.directfb.org/downloads/Core/linux-fusion/%{pname}-%{version}.tar.xz
 # Source0-md5:	5799f52ec656cdd3da592c94a6262199
 Patch0:		linux-3.19.patch
+Patch1:		linux-4.1.patch
 URL:		http://www.directfb.org/
 %{?with_kernel:%{expand:%buildrequires_kernel kernel%%{_alt_kernel}-module-build >= 3:2.6.20.2}}
 BuildRequires:	rpmbuild(macros) >= 1.701
@@ -145,6 +146,7 @@ Linux One to nowe API IPC wykorzystywane przez Comę.\
 %prep
 %setup -q -n %{pname}-%{version}
 %patch0 -p1
+%patch1 -p1
 
 %{__sed} -i -e 's/^obj-[^ ]*/obj-m/' linux/drivers/char/fusion/Makefile-2.6
 %{__sed} -i -e 's/^obj-[^ ]*/obj-m/' one/Makefile-2.6

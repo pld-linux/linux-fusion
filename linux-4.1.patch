@@ -1,0 +1,14 @@
+--- linux-fusion-9.0.3/one/one_udp.c~	2015-07-03 20:10:40.000000000 +0200
++++ linux-fusion-9.0.3/one/one_udp.c	2015-07-04 15:06:54.458207017 +0200
+@@ -193,7 +193,11 @@
+ 
+      oldfs = get_fs();
+      set_fs(KERNEL_DS);
++#if LINUX_VERSION_CODE < KERNEL_VERSION(4,1,0)
+      size = sock_sendmsg(sock,&msg,len);
++#else
++     size = sock_sendmsg(sock,&msg);
++#endif
+      set_fs(oldfs);
+ 
+      return size;
