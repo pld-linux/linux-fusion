@@ -18,7 +18,7 @@ exit 1
 %define		_enable_debug_packages	0
 %endif
 
-%define		rel	5
+%define		rel	6
 %define		pname	linux-fusion
 Summary:	Fusion and One Linux kernel modules
 Summary(pl.UTF-8):	Moduły Fusion i One dla jądra Linuksa
@@ -151,7 +151,7 @@ Linux One to nowe API IPC wykorzystywane przez Comę.\
 %{__sed} -i -e 's/^obj-[^ ]*/obj-m/' linux/drivers/char/fusion/Makefile-2.6
 %{__sed} -i -e 's/^obj-[^ ]*/obj-m/' one/Makefile-2.6
 echo "EXTRA_CFLAGS = -I`pwd`/linux/include -I`pwd`/linux/drivers/char/fusion -I`pwd`/linux/drivers/char/fusion/single" >> linux/drivers/char/fusion/Makefile-2.6
-echo "EXTRA_CFLAGS = -I`pwd`/include -I`pwd`/one/single" >> one/Makefile-2.6
+echo "EXTRA_CFLAGS = -I`pwd`/include -I`pwd`/one -I`pwd`/one/single" >> one/Makefile-2.6
 
 ln -sf Makefile-2.6 linux/drivers/char/fusion/Makefile
 ln -sf Makefile-2.6 one/Makefile
