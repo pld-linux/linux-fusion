@@ -145,8 +145,8 @@ Linux One to nowe API IPC wykorzystywane przez Comę.\
 
 %prep
 %setup -q -n %{pname}-%{version}
-%patch0 -p1
-%patch1 -p1
+%patch -P0 -p1
+%patch -P1 -p1
 
 %{__sed} -i -e 's/^obj-[^ ]*/obj-m/' linux/drivers/char/fusion/Makefile-2.6
 %{__sed} -i -e 's/^obj-[^ ]*/obj-m/' one/Makefile-2.6
